@@ -15,7 +15,11 @@ function encrypt(inputString) {
 
   var result = "";
   for (var i = 0; i < inputString.length; i++) {
-    result = result + mapping[inputString[i]];
+    var encryptChar = mapping[inputString[i]];
+    if (encryptChar === undefined) {
+      throw new ArgumentError("non-latin alphabet character encountered");
+    }
+    result = result + encryptChar;
   }
   return result;
 }
