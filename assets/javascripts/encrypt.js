@@ -12,5 +12,10 @@ function encrypt(inputString) {
     'U': 'V', 'V': 'W', 'W': 'X', 'X': 'Y', 'Y': 'Z',
     'Z': 'A'
   };
-  return mapping[inputString];
+
+  var result = "";
+  for (var i = 0; i < inputString.length; i++) {
+    result = result + mapping[inputString[i]];
+  }
+  return result;
 }

@@ -24,4 +24,8 @@ describe("Encrypt String", function() {
       }
     }
   })
+
+  it("when input string is 'television it returns 'ufmfwjtjpo", function() {
+    expect(encrypt('television')).toEqual('ufmfwjtjpo');
+  })
 })
