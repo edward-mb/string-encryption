@@ -1,3 +1,11 @@
+function ArgumentError(message) {
+  this.name = 'ArgumentError';
+  this.message = message || 'ArgumentError';
+  this.stack = (new Error()).stack;
+}
+ArgumentError.prototype = Object.create(Error.prototype);
+ArgumentError.prototype.constructor = ArgumentError;
+
 function encrypt(inputString) {
   var mapping = {
     'a': 'b', 'b': 'c', 'c': 'd', 'd': 'e', 'e': 'f',
@@ -12,22 +20,18 @@ function encrypt(inputString) {
     'U': 'V', 'V': 'W', 'W': 'X', 'X': 'Y', 'Y': 'Z',
     'Z': 'A'
   };
-
-  var result = "";
-  for (var i = 0; i < inputString.length; i++) {
-    var encryptChar = mapping[inputString[i]];
-    if (encryptChar === undefined) {
+  var encryptChar = function(inputChar) {
+    var encryptedChar = mapping[inputChar];
+    if (encryptedChar === undefined) {
       throw new ArgumentError("non-latin alphabet character encountered");
     }
-    result = result + encryptChar;
-  }
-  return result;
+    return encryptedChar;
+  };
+  return (
+    inputString.
+      split('').
+      map(encryptChar).
+      join('')
+  );
 }
 
-function ArgumentError(message) {
-  this.name = 'ArgumentError';
-  this.message = message || 'ArgumentError';
-  this.stack = (new Error()).stack;
-}
-ArgumentError.prototype = Object.create(Error.prototype);
-ArgumentError.prototype.constructor = ArgumentError;
