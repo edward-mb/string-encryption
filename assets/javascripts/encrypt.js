@@ -19,3 +19,11 @@ function encrypt(inputString) {
   }
   return result;
 }
+
+function ArgumentError(message) {
+  this.name = 'ArgumentError';
+  this.message = message || 'ArgumentError';
+  this.stack = (new Error()).stack;
+}
+ArgumentError.prototype = Object.create(Error.prototype);
+ArgumentError.prototype.constructor = ArgumentError;
