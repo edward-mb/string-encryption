@@ -40,3 +40,69 @@ describe("Encrypt String", function() {
     }).toThrowError(ArgumentError, "non-latin alphabet character encountered");
   });
 })
+
+describe("Testing 'mixStrings'", function() {
+
+  beforeEach(function() {
+    this.first = "foo"
+    this.second = "bar"
+  })
+  it("should have the name 'mixStrings'", function() {
+    expect(mixStrings).toBeDefined();
+  })
+  it("should take two string arguments", function() {
+    expect(mixStrings.length).toEqual(2);
+  })
+
+  describe("when first string is empty '' null or undefined", function() {
+    beforeEach(function() {
+      this.first = ""
+    })
+    describe("and second string is 'klm'", function() {
+      beforeEach(function() {
+        this.second = "klm"
+      })
+      it("returns 'klm'", function() {
+        expect(mixStrings(this.first, this.second)).toEqual('klm')
+      })
+    })
+
+    describe("and second string is empty '' null or undefined", function() {
+      beforeEach(function() {
+        this.second = undefined
+      })
+      it("returns ''", function() {
+        expect(mixStrings(this.first, this.second)).toEqual('')
+      })
+    })
+  })
+  describe("when first string is 'abc'", function() {
+    describe("and the second string is empty '' or null or undefined", function() {
+      it("should return 'abc'", function() {
+        expect(mixStrings(this.first, '')).toEqual(this.first)
+      })
+    })
+
+  })
+
+  describe(`first string is 'foo'`, function() {
+    describe(`and second string is 'bar'`, function() {
+
+      it("should return 'fboaor'", function() {
+        expect(mixStrings(this.first, this.second)).toEqual('fboaor')
+      })
+    })
+  })
+  describe(`first string is 'f'`, function() {
+    describe(`and second string is 'b'`, function() {
+      beforeEach(function() {
+        this.first = "f"
+        this.second = "b"
+      })
+
+      it("should return 'fb'", function() {
+        expect(mixStrings(this.first, this.second)).toEqual('fb')
+      })
+    })
+  })
+})

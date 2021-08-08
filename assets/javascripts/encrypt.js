@@ -35,3 +35,27 @@ function encrypt(inputString) {
   );
 }
 
+function mixStrings(firstString, secondString) {
+  if (!firstString && secondString)
+    return secondString;
+  if (!firstString && !secondString)
+    return '';
+  if (firstString && !secondString)
+    return firstString;
+
+  firstStringLength = firstString.length
+  secondStringLength = secondString.length
+
+  maxLength = Math.max(firstStringLength, secondStringLength)
+
+  var mixedString = ''
+
+  for (let i = 0; i < maxLength; i++) {
+    if (i <= firstStringLength - 1)
+      mixedString += firstString.charAt(i)
+    if (i <= secondStringLength - 1)
+      mixedString += secondString.charAt(i)
+  }
+  return mixedString
+}
+
